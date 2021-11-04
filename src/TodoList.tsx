@@ -5,7 +5,7 @@ import TodoListItem from 'TodoListItem';
 export interface TodoListProps {
   id?: number;
   text?: string;
-  checked?: boolean;
+  checked: boolean;
 }
 
 interface TodoProps {
