@@ -9,19 +9,21 @@ import { TodoListProps } from 'TodoList';
 
 interface TodoProps {
   todo: TodoListProps;
+  onRemove: (id: number) => void;
+  onChecked: (id: number) => void;
 }
 
-const TodoListItem = ({ todo }: TodoProps) => {
-  const { text, checked } = todo;
+const TodoListItem = ({ todo, onRemove, onChecked }: TodoProps) => {
+  const { id, text, checked } = todo;
 
   return (
     <>
       <TodoItems>
-        <CheckBox>
+        <CheckBox onClick={() => onChecked(id)}>
           {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
           <Text>{text}</Text>
         </CheckBox>
-        <Remove>
+        <Remove onClick={() => onRemove(id)}>
           <MdRemoveCircleOutline />
         </Remove>
       </TodoItems>

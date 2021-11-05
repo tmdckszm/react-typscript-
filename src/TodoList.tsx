@@ -3,20 +3,29 @@ import styled from 'styled-components';
 import TodoListItem from 'TodoListItem';
 
 export interface TodoListProps {
-  id?: number;
-  text?: string;
+  id: number;
+  text: string;
   checked: boolean;
 }
 
 interface TodoProps {
   todos: TodoListProps[];
+  onRemove: (id: number) => void;
+  onChecked: (id: number) => void;
 }
 
-const TodoList = ({ todos }: TodoProps) => {
+const TodoList = ({ todos, onRemove, onChecked }: TodoProps) => {
   return (
     <TodoLists>
       {todos.map((todo) => {
-        return <TodoListItem todo={todo} key={todo.id} />;
+        return (
+          <TodoListItem
+            todo={todo}
+            key={todo.id}
+            onRemove={onRemove}
+            onChecked={onChecked}
+          />
+        );
       })}
     </TodoLists>
   );
