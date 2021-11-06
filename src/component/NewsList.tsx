@@ -11,7 +11,8 @@ const NewsList = ({ category }: any) => {
       try {
         const query = category === 'all' ? '' : `&catergory=${category}`;
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=470afb7e87fb479b968804ea89e471f2`,
+          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=b79ea329f871432a9351a1c1d836088b
+          `,
         );
         setArticle(response.data.articles);
       } catch (e) {
@@ -19,7 +20,7 @@ const NewsList = ({ category }: any) => {
       }
     };
     fetchData();
-  });
+  }, [category]);
 
   return (
     <NewsListBlock>
