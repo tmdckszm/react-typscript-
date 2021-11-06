@@ -1,11 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface CategorisProps {
-  onSelect: (c: string) => void;
-}
-
-const Categories = ({ onSelect }: CategorisProps) => {
+const Categories = () => {
   const categories = [
     { name: 'all', text: '전체보기' },
     { name: 'business', text: '비즈니스' },
@@ -15,12 +12,18 @@ const Categories = ({ onSelect }: CategorisProps) => {
     { name: 'sports', text: '스포츠' },
     { name: 'technology', text: '기술' },
   ];
+
   return (
     <>
       <CategoriesBlock>
         {categories.map((c) => {
           return (
-            <Category key={c.name} onClick={() => onSelect(c.name)}>
+            <Category
+              key={c.name}
+              activeClassName="active"
+              exact={c.name === 'all'}
+              to={c.name === 'all' ? '/' : `/${c.name}`}
+            >
               {c.text}
             </Category>
           );
@@ -41,7 +44,7 @@ const CategoriesBlock = styled.div`
   }
 `;
 
-const Category = styled.div`
+const Category = styled(NavLink)`
   font-size: 1.125rem;
   cursor: pointer;
   white-space: pre;
@@ -50,6 +53,15 @@ const Category = styled.div`
   padding-bottom: 0%.25rem;
   &:hover {
     color: #495057;
+  }
+
+  &.active {
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color: #22b8cf;
+    &:hover {
+      color: #3bc9db;
+    }
   }
 
   & + & {
